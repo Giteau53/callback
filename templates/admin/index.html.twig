@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration
+{% endblock %}
+
+{% block body %}
+	Tout les rappels
+	<button>Les 5 dernier rappels</button>
+	<button>
+		<a href="{{path('admin_last')}}">Rappel du jour</a>
+	</button>
+	<button>Ajouter un créneaux</button>
+	<div class="col-md-9">
+		<h3>Tout les rappels</h3>
+		{% if callbacks %}
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Email</th>
+						<th scope="col">Téléphone</th>
+						<th scope="col">Créneaux</th>
+						<th scope="col">Date</th>
+						<th scope="col">Message</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for callback in callbacks %}
+						<tbody>
+							<tr>
+								<th scope="row">{{callback.id}}</th>
+								<td>{{callback.lastname}}</td>
+								<td>{{callback.firstname}}</td>
+								<td>{{callback.email}}</td>
+								<td>{{callback.phone}}</td>
+								<td>{{callback.time}}</td>
+								<td>{{callback.date|date("d/m/Y")}}</td>
+								<td>{{callback.message}}</td>
+
+							</tr>
+
+						</tbody>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+
+
+	</div>
+
+{% endblock %}
