@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Repository;
-
+use Doctrine\DBAL\Types\Types;
 use App\Entity\Callback;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -45,22 +46,23 @@ class CallbackRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Callback[] Returns an array of Callback objects
-    //  */
-    /*
-    public function findByExampleField($value)
+ 
+    
+    public function findByDate()
     {
+
+        $dateNow = new \DateTime('now');
+        
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.date = :dateNow')
+            ->setParameter('dateNow', $dateNow ->format('Y-m-d') )         
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+   
+
+
 
     /*
     public function findOneBySomeField($value): ?Callback
