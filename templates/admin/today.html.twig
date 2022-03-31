@@ -1,22 +1,19 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}Administration
 {% endblock %}
 
 {% block body %}
 
+
 	<a href="{{path('admin')}}" class="btn btn-primary">Tout les rappels</a>
-
-
-	<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
+	<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
 
 	<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
 	</a>
-
 	<div class="col-md-9">
-		<h3>Tout les rappels</h3>
-		{% if lastcallbacks %}
+		<h3>Rappel du jour</h3>
+		{% if todaycallbacks %}
 
 			<table class="table">
 				<thead>
@@ -32,17 +29,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for lastcallback in lastcallbacks %}
+					{% for todaycallback in todaycallbacks %}
 						<tbody>
 							<tr>
-								<th scope="row">{{lastcallback.id}}</th>
-								<td>{{lastcallback.lastname}}</td>
-								<td>{{lastcallback.firstname}}</td>
-								<td>{{lastcallback.email}}</td>
-								<td>{{lastcallback.phone}}</td>
-								<td>{{lastcallback.time}}</td>
-								<td>{{lastcallback.date|date("d/m/Y")}}</td>
-								<td>{{lastcallback.message}}</td>
+								<th scope="row">{{todaycallback.id}}</th>
+								<td>{{todaycallback.lastname}}</td>
+								<td>{{todaycallback.firstname}}</td>
+								<td>{{todaycallback.email}}</td>
+								<td>{{todaycallback.phone}}</td>
+								<td>{{todaycallback.time}}</td>
+								<td>{{todaycallback.date|date("d/m/Y")}}</td>
+								<td>{{todaycallback.message}}</td>
 
 							</tr>
 

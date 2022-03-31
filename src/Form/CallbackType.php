@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Creneau;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CallbackType extends AbstractType
@@ -36,15 +40,24 @@ class CallbackType extends AbstractType
             ->add('phone', TelType::class,[
                 'label' => 'Téléphone',
             ])
-            ->add('time', ChoiceType::class,[
-                'label' => 'Heure de rappel',
-                'choices' => [
-                    'Matin 9h - 11h',
-                ]
+
+            // ->add('moment', EntityType::class, [
+            //     'label' => 'Moment de la journée',
+            //     'choice_label' => 'moment',
+                
+            //     'class' => Creneau::class,
+            // ])
+      
+            ->add('time', EntityType::class,[
+                
+                'class' => Creneau::class,               
+                'choice_label' => 'creneau',
+                'label' => 'Choix du créneau',
             ])
             ->add('date', DateType::class,[
                 'label' => 'Jour de rappel',
                 'widget' => 'single_text',
+                'data' => new \DateTime('now')
             ])
             ->add('message', TextareaType::class,[
                 'label' => 'Votre message',
@@ -54,7 +67,10 @@ class CallbackType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary'
                 ]
-            ])
+                ])
+                ;
+                
+               
         ;
     }
 

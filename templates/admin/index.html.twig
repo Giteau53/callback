@@ -2,27 +2,31 @@
 
 {% block title %}Administration
 {% endblock %}
-
 {% block body %}
-	Tout les rappels
-	<button>Les 5 dernier rappels</button>
-	<button>
-		<a href="{{path('admin_last')}}">Rappel du jour</a>
-	</button>
-	<button>Ajouter un créneaux</button>
-	<div class="col-md-9">
-		<h3>Tout les rappels</h3>
+
+
+	<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
+
+
+	<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
+
+	<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
+	</a>
+	<div class="  ">
+		<h3 class="d-flex justify-content-center mt-3">Tout les rappels</h3>
+
 		{% if callbacks %}
 
 			<table class="table">
-				<thead>
+				<thead class=" ">
 					<tr>
-						<th scope="col">#</th>
+						<th scope="col ">#</th>
 						<th scope="col">Nom</th>
 						<th scope="col">Prénom</th>
 						<th scope="col">Email</th>
 						<th scope="col">Téléphone</th>
-						<th scope="col">Créneaux</th>
+						<th scope="col">Moment</th>
+						<th scope="col">Heure</th>
 						<th scope="col">Date</th>
 						<th scope="col">Message</th>
 					</tr>
@@ -37,6 +41,7 @@
 								<td>{{callback.email}}</td>
 								<td>{{callback.phone}}</td>
 								<td>{{callback.time}}</td>
+								<td>{{callback.moment}}</td>
 								<td>{{callback.date|date("d/m/Y")}}</td>
 								<td>{{callback.message}}</td>
 

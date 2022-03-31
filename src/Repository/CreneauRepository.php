@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Creneau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
+
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,10 +17,13 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CreneauRepository extends ServiceEntityRepository
 {
+   
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Creneau::class);
     }
+
+   
 
     /**
      * @throws ORMException
@@ -44,6 +48,8 @@ class CreneauRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+
 
     // /**
     //  * @return Creneau[] Returns an array of Creneau objects

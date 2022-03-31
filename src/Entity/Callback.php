@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CallbackRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CallbackRepository::class)
@@ -19,21 +20,36 @@ class Callback
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Ton prénom doit avoir minimum 2 caractères",
+     *      maxMessage = "Ton prénom doit contenir maximum 50 caractères"
+     * )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Ton prénom doit avoir minimum 2 caractères",
+     *      maxMessage = "Ton prénom doit contenir maximum 50 caractères"
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     * message = "L'email saisi n'est pas un email valide."
+     * )
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)    
      */
     private $phone;
 
@@ -47,10 +63,20 @@ class Callback
      */
     private $date;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+    }
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $message;
+
+  
+
+    
+  
+
 
     public function getId(): ?int
     {
@@ -140,4 +166,10 @@ class Callback
 
         return $this;
     }
+
+
+
+   
+
+
 }

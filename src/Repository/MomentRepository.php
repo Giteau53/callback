@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Firstname;
+use App\Entity\Moment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Firstname|null find($id, $lockMode = null, $lockVersion = null)
- * @method Firstname|null findOneBy(array $criteria, array $orderBy = null)
- * @method Firstname[]    findAll()
- * @method Firstname[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Moment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Moment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Moment[]    findAll()
+ * @method Moment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FirstnameRepository extends ServiceEntityRepository
+class MomentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Firstname::class);
+        parent::__construct($registry, Moment::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Firstname $entity, bool $flush = true): void
+    public function add(Moment $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class FirstnameRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Firstname $entity, bool $flush = true): void
+    public function remove(Moment $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,15 +46,15 @@ class FirstnameRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Firstname[] Returns an array of Firstname objects
+    //  * @return Moment[] Returns an array of Moment objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
+            ->orderBy('m.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -63,10 +63,10 @@ class FirstnameRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Firstname
+    public function findOneBySomeField($value): ?Moment
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

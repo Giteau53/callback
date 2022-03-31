@@ -1,6 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration
+{% block title %}Hello AddCreneauxController!
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<h1>Ajouter un créneau !</h1>
+	<a href="{{path('admin_add')}}" class="btn btn-primary">Tout les rappels</a>
+	<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
+
+
+	<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
+
+
+	<div class="example-wrapper">
+		{{form(form)}}
+		</div>
+	{% endblock %}

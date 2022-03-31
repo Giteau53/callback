@@ -34,9 +34,25 @@ class AdminController extends AbstractController
 
      public function last(CallbackRepository $callbackRepository)
      {
-         $lastcallbacks = $callbackRepository->findBy([],['id'=>'DESC']);
+         $lastcallbacks = $callbackRepository->findBy([],['id'=>'DESC'],5);
          return $this->render('admin/last.html.twig',[
              'lastcallbacks' => $lastcallbacks,
          ]);
      }
+
+    /**
+     * @Route("/admin/today", name="admin_today")
+     */
+
+    public function today(   CallbackRepository $callbackRepository)
+    {
+           
+        $todaycallbacks = $callbackRepository->findByDate();
+        return $this->render('admin/today.html.twig',[
+            'todaycallbacks' => $todaycallbacks,
+           
+            
+           
+        ]);
+    }
 }

@@ -28,12 +28,19 @@ class CallbackController extends AbstractController
         $form = $this->createForm(CallbackType::class, $callback);
         $form->handleRequest($request);
 
+       
+
         if ($form->isSubmitted() && $form->isValid()){
             $this->entityManager->persist($callback);
             $this->entityManager->flush();
+            $this->addFlash('notice', 'Merci !');
+            $this->redirectToRoute('callback');
+            
+            
         }
+        
         return $this->render('callback/index.html.twig', [
-            'form' => $form->createView(),
+            'form_callback' => $form->createView(),
         ]);
     }
 }
