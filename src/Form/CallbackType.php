@@ -41,14 +41,14 @@ class CallbackType extends AbstractType
                 'label' => 'Téléphone',
             ])
 
-            // ->add('moment', EntityType::class, [
-            //     'label' => 'Moment de la journée',
-            //     'choice_label' => 'moment',
+            ->add('creneau', EntityType::class, [
+                'label' => 'Moment de la journée',
+                'class' => Creneau::class,
+                'choice_label' => 'moment',
                 
-            //     'class' => Creneau::class,
-            // ])
+            ])
       
-            ->add('time', EntityType::class,[
+            ->add('moment', EntityType::class,[
                 
                 'class' => Creneau::class,               
                 'choice_label' => 'creneau',

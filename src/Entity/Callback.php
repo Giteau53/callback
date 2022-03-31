@@ -53,10 +53,7 @@ class Callback
      */
     private $phone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $time;
+   
 
     /**
      * @ORM\Column(type="datetime")
@@ -71,6 +68,24 @@ class Callback
      * @ORM\Column(type="string", length=255)
      */
     private $message;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Creneau::class, inversedBy="creneau_id", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $creneau;
+
+    /**
+     * @ORM\OneToOne(targetEntity=creneau::class, inversedBy="part", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $moment;
+
+  
+
+ 
+
+    
 
   
 
@@ -131,17 +146,7 @@ class Callback
         return $this;
     }
 
-    public function getTime(): ?string
-    {
-        return $this->time;
-    }
-
-    public function setTime(string $time): self
-    {
-        $this->time = $time;
-
-        return $this;
-    }
+  
 
     public function getDate(): ?\DateTimeInterface
     {
@@ -166,6 +171,36 @@ class Callback
 
         return $this;
     }
+
+    public function getCreneau(): ?creneau
+    {
+        return $this->creneau;
+    }
+
+    public function setCreneau(creneau $creneau): self
+    {
+        $this->creneau = $creneau;
+
+        return $this;
+    }
+
+    public function getMoment(): ?creneau
+    {
+        return $this->moment;
+    }
+
+    public function setMoment(creneau $moment): self
+    {
+        $this->moment = $moment;
+
+        return $this;
+    }
+
+  
+
+   
+
+  
 
 
 

@@ -34,6 +34,22 @@ class Creneau
      */
     private $moment;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Callback::class, mappedBy="creneau", cascade={"persist", "remove"})
+     */
+    private $callback;
+
+  
+    /**
+     * @ORM\OneToOne(targetEntity=Callback::class, mappedBy="creneau", cascade={"persist", "remove"})
+     */
+    private $creneau_id;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Callback::class, mappedBy="moment", cascade={"persist", "remove"})
+     */
+    private $part;
+
   
 
     public function __construct()
@@ -87,6 +103,47 @@ class Creneau
 
         return $this;
     }
+
+    public function getCallback(): ?Callback
+    {
+        return $this->callback;
+    }
+
+    public function getCreneauId(): ?Callback
+    {
+        return $this->creneau_id;
+    }
+
+    public function setCreneauId(Callback $creneau_id): self
+    {
+        // set the owning side of the relation if necessary
+        if ($creneau_id->getCreneau() !== $this) {
+            $creneau_id->setCreneau($this);
+        }
+
+        $this->creneau_id = $creneau_id;
+
+        return $this;
+    }
+
+    public function getPart(): ?Callback
+    {
+        return $this->part;
+    }
+
+    public function setPart(Callback $part): self
+    {
+        // set the owning side of the relation if necessary
+        if ($part->getMoment() !== $this) {
+            $part->setMoment($this);
+        }
+
+        $this->part = $part;
+
+        return $this;
+    }
+
+  
 
 
 

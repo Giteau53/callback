@@ -21,10 +21,10 @@ class AddCreneauxType extends AbstractType
         $builder
             ->add('moment' , ChoiceType::class, [
                 'choices' => [
-                    'Matin' => 'matin',
-                    'Midi' => 'midi',
-                    'Après-midi' => 'après-midi',
-                    'Soir' => 'soir',
+                    'Matin' => 'Matin',
+                    'Midi' => 'Midi',
+                    'Après-midi' => 'Après-midi',
+                    'Soir' => 'Soir',
                 ]
             ])
             ->add('creneau' , TextType::class, [
@@ -33,6 +33,7 @@ class AddCreneauxType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Enregistrer"
             ])
+            
         ;
     }
 
