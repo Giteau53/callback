@@ -28,10 +28,16 @@ class AddCreneauxType extends AbstractType
                 ]
             ])
             ->add('creneau' , TextType::class, [
-                'label' => 'Entrez nouveau créneau'
+                'label' => "Entrez l'heure du nouveau créneau",
+                'attr' => [
+                    'placeholder' => 'ex: 00h',
+                ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => "Enregistrer"
+                'label' => "Enregistrer",
+                'attr' => [
+                    "class" => "w-100 btn btn-primary"
+                ]
             ])
             
         ;

@@ -65,7 +65,7 @@ class CallbackType extends AbstractType
             ->add('send', SubmitType::class,[
                 'label' => 'Envoyer',
                 'attr' => [
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn btn-primary w-100'
                 ]
                 ])
                 ;

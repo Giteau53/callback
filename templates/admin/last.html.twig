@@ -5,54 +5,56 @@
 {% endblock %}
 
 {% block body %}
-
-	<a href="{{path('admin')}}" class="btn btn-primary">Tout les rappels</a>
-
-
-	<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
-
-	<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
-	</a>
-
-	<div class="col-md-9">
-		<h3>Tout les rappels</h3>
-		{% if lastcallbacks %}
-
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Prénom</th>
-						<th scope="col">Email</th>
-						<th scope="col">Téléphone</th>
-						<th scope="col">Créneaux</th>
-						<th scope="col">Date</th>
-						<th scope="col">Message</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for lastcallback in lastcallbacks %}
-						<tbody>
-							<tr>
-								<th scope="row">{{lastcallback.id}}</th>
-								<td>{{lastcallback.lastname}}</td>
-								<td>{{lastcallback.firstname}}</td>
-								<td>{{lastcallback.email}}</td>
-								<td>{{lastcallback.phone}}</td>
-								<td>{{lastcallback.time}}</td>
-								<td>{{lastcallback.date|date("d/m/Y")}}</td>
-								<td>{{lastcallback.message}}</td>
-
-							</tr>
-
-						</tbody>
-					{% endfor %}
-				</tbody>
-			</table>
-		{% endif %}
+	<div class=" d-flex justify-content-evenly my-5">
+		<a href="{{path('admin')}}" class="btn btn-primary">Tout les rappels</a>
 
 
+		<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
+
+		<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
+		</a>
 	</div>
+	<div class="row">
+		<div class="col-8 mx-auto">
+			<h3 class="text-center my-3">Les 5 derniers rappels !</h3>
+			{% if lastcallbacks %}
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr class="table-info">
+								<th scope="col">#</th>
+								<th scope="col">Nom</th>
+								<th scope="col">Prénom</th>
+								<th scope="col">Email</th>
+								<th scope="col">Téléphone</th>
+								{# <th scope="col">Créneaux</th> #}
+								<th scope="col">Date</th>
+								<th scope="col">Message</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for lastcallback in lastcallbacks %}
+								<tbody>
+									<tr>
+										<th scope="row">{{lastcallback.id}}</th>
+										<td>{{lastcallback.lastname}}</td>
+										<td>{{lastcallback.firstname}}</td>
+										<td>{{lastcallback.email}}</td>
+										<td>{{lastcallback.phone}}</td>
+										{# <td>{{lastcallback.time}}</td> #}
+										<td>{{lastcallback.date|date("d/m/Y")}}</td>
+										<td>{{lastcallback.message}}</td>
 
+									</tr>
+
+								</tbody>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% endif %}
+
+
+		</div>
+	</div>
 {% endblock %}

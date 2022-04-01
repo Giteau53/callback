@@ -5,48 +5,50 @@
 
 {% block body %}
 
+	<div class=" d-flex justify-content-evenly my-5">
+		<a href="{{path('admin')}}" class="btn btn-primary">Tout les rappels</a>
+		<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
 
-	<a href="{{path('admin')}}" class="btn btn-primary">Tout les rappels</a>
-	<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
-
-	<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
-	</a>
-	<div class="col-md-9">
-		<h3>Rappel du jour</h3>
+		<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
+		</a>
+	</div>
+	<div class="col-8 mx-auto">
+		<h3 class="text-center my-3">Les rappels du jour</h3>
 		{% if todaycallbacks %}
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr class="table-info">
+							<th scope="col">#</th>
+							<th scope="col">Nom</th>
+							<th scope="col">Prénom</th>
+							<th scope="col">Email</th>
+							<th scope="col">Téléphone</th>
+							{# <th scope="col">Créneaux</th> #}
+							<th scope="col">Date</th>
+							<th scope="col">Message</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for todaycallback in todaycallbacks %}
+							<tbody>
+								<tr>
+									<th scope="row">{{todaycallback.id}}</th>
+									<td>{{todaycallback.lastname}}</td>
+									<td>{{todaycallback.firstname}}</td>
+									<td>{{todaycallback.email}}</td>
+									<td>{{todaycallback.phone}}</td>
+									{# <td>{{todaycallback.time}}</td> #}
+									<td>{{todaycallback.date|date("d/m/Y")}}</td>
+									<td>{{todaycallback.message}}</td>
 
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Prénom</th>
-						<th scope="col">Email</th>
-						<th scope="col">Téléphone</th>
-						<th scope="col">Créneaux</th>
-						<th scope="col">Date</th>
-						<th scope="col">Message</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for todaycallback in todaycallbacks %}
-						<tbody>
-							<tr>
-								<th scope="row">{{todaycallback.id}}</th>
-								<td>{{todaycallback.lastname}}</td>
-								<td>{{todaycallback.firstname}}</td>
-								<td>{{todaycallback.email}}</td>
-								<td>{{todaycallback.phone}}</td>
-								<td>{{todaycallback.time}}</td>
-								<td>{{todaycallback.date|date("d/m/Y")}}</td>
-								<td>{{todaycallback.message}}</td>
+								</tr>
 
-							</tr>
-
-						</tbody>
-					{% endfor %}
-				</tbody>
-			</table>
+							</tbody>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		{% endif %}
 
 
