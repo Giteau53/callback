@@ -7,6 +7,38 @@
 
 	<h2 class="text-center my-5">Remplissez le formulaire pour que l'on vous recontacte !</h2>
 	<div class="col-6 mx-auto ">
+		{% for message in app.flashes('bravo') %}
+			<div class="alert alert-success">{{ message }}</div>
+		{% endfor %}
+		{% block javascripts %}
+			<script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+			<script src="{{ asset('js/ckeditor.js') }}"></script>
+			<script src="{{ asset('js/images.js') }}"></script>
+			<script>
+				window.onload = () => { // On va chercher la région
+let moment = document.querySelector("#callback_moment");
+moment.addEventListener("change", function () {
+let form = this.closest("form");
+let data = this.name + "=" + this.value;
+
+fetch(form.action, {
+method: form.getAttribute("method"),
+body: data,
+headers: {
+"Content-Type": "application/x-www-form-urlencoded; charset:UTF-8"
+}
+}).then(response => response.text()).then(html => {
+let content = document.createElement("html");
+content.innerHTML = html;
+let nouveauSelect = content.querySelector("#callback_creneau");
+document.querySelector("#callback_creneau").replaceWith(nouveauSelect);
+}).catch(error => {
+console.log(error);
+})
+});
+}
+			</script>
+		{% endblock %}
 
 		{{form((form_callback)) }}
 
