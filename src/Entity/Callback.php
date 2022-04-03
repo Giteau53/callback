@@ -75,12 +75,7 @@ class Callback
      */
     private $creneau;
 
-    /**
-     * @ORM\OneToOne(targetEntity=creneau::class, inversedBy="part", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $moment;
-
+    
   
 
  
@@ -184,17 +179,7 @@ class Callback
         return $this;
     }
 
-    public function getMoment(): ?creneau
-    {
-        return $this->moment;
-    }
-
-    public function setMoment(creneau $moment): self
-    {
-        $this->moment = $moment;
-
-        return $this;
-    }
+    
 
   
 

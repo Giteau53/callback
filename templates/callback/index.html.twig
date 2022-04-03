@@ -11,15 +11,16 @@
 			<div class="alert alert-success">{{ message }}</div>
 		{% endfor %}
 		{% block javascripts %}
-			<script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
-			<script src="{{ asset('js/ckeditor.js') }}"></script>
-			<script src="{{ asset('js/images.js') }}"></script>
+
 			<script>
-				window.onload = () => { // On va chercher la région
+				window.onload = () => {
 let moment = document.querySelector("#callback_moment");
 moment.addEventListener("change", function () {
 let form = this.closest("form");
+console.log(form);
 let data = this.name + "=" + this.value;
+console.log(data)
+
 
 fetch(form.action, {
 method: form.getAttribute("method"),
@@ -31,6 +32,7 @@ headers: {
 let content = document.createElement("html");
 content.innerHTML = html;
 let nouveauSelect = content.querySelector("#callback_creneau");
+console.log(nouveauSelect)
 document.querySelector("#callback_creneau").replaceWith(nouveauSelect);
 }).catch(error => {
 console.log(error);

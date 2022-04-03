@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Callback;
 use App\Entity\Creneau;
-use App\Entity\Moment;
+
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -73,13 +73,14 @@ class CallbackType extends AbstractType
             ])
         ;
 
-        $formModifier = function (FormInterface $form, Moment $moment = null) {
-            $heures = null === $moment ? [] : $moment->getCreneau();
+        $formModifier = function (FormInterface $form, Creneau $creneau = null) {
+            $heures = (null === $creneau) ? [] : $creneau->getCreneau();
 
-            $form->add('creneau', EntityType::class, [
+            $form->add('creneau', EntityType::class,  [
                 'class' => Creneau::class,
                 'choices' => $heures,
                 'required' => false,
+                
                 'choice_label' => 'name',
                 'placeholder' => 'heures',
                 'attr' => ['class' => 'custom-select'],
