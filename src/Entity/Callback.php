@@ -75,19 +75,11 @@ class Callback
      */
     private $creneau;
 
-    
-  
-
- 
+   
 
     
-
-  
-
     
   
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -179,7 +171,7 @@ class Callback
         return $this;
     }
 
-    
+  
 
   
 

@@ -52,13 +52,13 @@ class CallbackType extends AbstractType
                 'mapped' => false,
                 'class' => Creneau::class,
                 'choice_label' => 'moment',
-                
+                'placeholder' => 'Choisissez votre moment',
                 'label' => 'Moment',
                 'required' => false
             ])
 
             ->add('creneau', ChoiceType::class, [
-                
+                'placeholder' => 'Choisissez votre créneau',
                 'required' => false
             ])
 
@@ -88,7 +88,7 @@ class CallbackType extends AbstractType
             ]);
         };
 
-        $builder->get('moment')->addEventListener(
+        $builder->get('creneau')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) use ($formModifier) {
                 $moment = $event->getForm()->getData();

@@ -19,13 +19,10 @@ class AddCreneauxType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('moment' , ChoiceType::class, [
-                'choices' => [
-                    'Matin' => 'Matin',
-                    'Midi' => 'Midi',
-                    'Après-midi' => 'Après-midi',
-                    'Soir' => 'Soir',
-                ]
+            ->add('moment' , EntityType::class, [
+                'class' => Moment::class,
+                
+                
             ])
             ->add('creneau' , TextType::class, [
                 'label' => "Entrez l'heure du nouveau créneau",

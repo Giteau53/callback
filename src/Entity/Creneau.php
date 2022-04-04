@@ -24,36 +24,26 @@ class Creneau
      */
     private $creneau;
 
-    
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Moment::class, inversedBy="creneaux")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $moment;
-
-
-  
-    
-
-   
-
-  
+ 
 
     public function __construct()
     {
         $this->time = new ArrayCollection();
     }
 
-   
-  
-
- 
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+
+    
     public function getCreneau(): ?string
     {
         return $this->creneau;
@@ -66,6 +56,18 @@ class Creneau
         return $this;
     }
 
+    public function getMoment(): ?moment
+    {
+        return $this->moment;
+    }
+
+    public function setMoment(?moment $moment): self
+    {
+        $this->moment = $moment;
+
+        return $this;
+    }
+
 
 
    
@@ -73,17 +75,9 @@ class Creneau
 
     
 
-    public function getMoment(): ?string
-    {
-        return $this->moment;
-    }
+ 
 
-    public function setMoment(string $moment): self
-    {
-        $this->moment = $moment;
-
-        return $this;
-    }
+ 
 
    
    

@@ -10,41 +10,81 @@
 		{% for message in app.flashes('bravo') %}
 			<div class="alert alert-success">{{ message }}</div>
 		{% endfor %}
-		{% block javascripts %}
 
-			<script>
-				window.onload = () => {
+
+		{{ form_start(form_callback) }}
+		<div>
+			<div class='my-3'>
+				{{ form_label(form_callback.lastname) }}
+				{{ form_widget(form_callback.lastname) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.firstname) }}
+				{{ form_widget(form_callback.firstname) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.email) }}
+				{{ form_widget(form_callback.email) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.phone) }}
+				{{ form_widget(form_callback.phone) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.date) }}
+				{{ form_widget(form_callback.date) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.moment) }}
+				{{ form_widget(form_callback.moment) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.creneau) }}
+				{{ form_widget(form_callback.creneau) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.message) }}
+				{{ form_widget(form_callback.message) }}
+			</div>
+			<div class='my-3'>
+				{{ form_label(form_callback.send) }}
+				{{ form_widget(form_callback.send) }}
+			</div>
+		</div>
+
+		{{ form_end(form_callback) }}
+
+
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+
+
+	<script>
+		window.onload = () => {
 let moment = document.querySelector("#callback_moment");
 moment.addEventListener("change", function () {
 let form = this.closest("form");
 console.log(form);
 let data = this.name + "=" + this.value;
-console.log(data)
+console.log(data);
 
 
 fetch(form.action, {
 method: form.getAttribute("method"),
-body: data,
-headers: {
-"Content-Type": "application/x-www-form-urlencoded; charset:UTF-8"
-}
+body: data
+
 }).then(response => response.text()).then(html => {
 let content = document.createElement("html");
 content.innerHTML = html;
 let nouveauSelect = content.querySelector("#callback_creneau");
-console.log(nouveauSelect)
+console.log(nouveauSelect);
 document.querySelector("#callback_creneau").replaceWith(nouveauSelect);
 }).catch(error => {
 console.log(error);
 })
 });
 }
-			</script>
-		{% endblock %}
-
-		{{form((form_callback)) }}
-
-
-		</div>
-
-	{% endblock %}
+	</script>
+{% endblock %}
