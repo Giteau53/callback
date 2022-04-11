@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AddCreneauxController!
+{% block title %}Administration - Ajouter un créneau
 {% endblock %}
 
 {% block body %}
@@ -11,6 +11,9 @@
 
 		<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
 	</div>
+	{% for message in app.flashes('bravo') %}
+		<div class="alert alert-success text-center col-6 mx-auto">{{ message }}</div>
+	{% endfor %}
 	<h1 class="text-center">Ajouter un créneau !</h1>
 
 

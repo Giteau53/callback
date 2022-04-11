@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Controller\Admin;
-use App\Entity\Callback;
+
+use App\Form\SearchCallbackType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CallbackRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,11 +21,22 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index(CallbackRepository $callbackRepository): Response
+    public function index(CallbackRepository $callbackRepository, Request $request): Response
     {
         $callbacks = $callbackRepository->findAll();
+
+        $form = $this->createForm(SearchCallbackType::class);
+        $search = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $callbacks = $callbackRepository->search($search->get('mots')->getData());
+        }
+
         return $this->render('admin/index.html.twig', [
             'callbacks' => $callbacks,
+            'form' => $form->createView(),
+            
+            
         ]);
     }
 
@@ -55,4 +67,5 @@ class AdminController extends AbstractController
            
         ]);
     }
+    
 }

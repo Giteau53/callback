@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration
+{% block title %}Administration - rappels du jour
 {% endblock %}
 
 {% block body %}
@@ -24,7 +24,7 @@
 							<th scope="col">Prénom</th>
 							<th scope="col">Email</th>
 							<th scope="col">Téléphone</th>
-							{# <th scope="col">Créneaux</th> #}
+							<th scope="col">Créneaux</th>
 							<th scope="col">Date</th>
 							<th scope="col">Message</th>
 						</tr>
@@ -38,7 +38,7 @@
 									<td>{{todaycallback.firstname}}</td>
 									<td>{{todaycallback.email}}</td>
 									<td>{{todaycallback.phone}}</td>
-									{# <td>{{todaycallback.time}}</td> #}
+									<td>{{todaycallback.creneau}}</td>
 									<td>{{todaycallback.date|date("d/m/Y")}}</td>
 									<td>{{todaycallback.message}}</td>
 

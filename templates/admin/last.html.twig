@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Administration
+{% block title %}Administration - Dernier rappels
 {% endblock %}
 
 {% block body %}
@@ -27,7 +27,7 @@
 								<th scope="col">Prénom</th>
 								<th scope="col">Email</th>
 								<th scope="col">Téléphone</th>
-								{# <th scope="col">Créneaux</th> #}
+								<th scope="col">Créneaux</th>
 								<th scope="col">Date</th>
 								<th scope="col">Message</th>
 							</tr>
@@ -41,7 +41,7 @@
 										<td>{{lastcallback.firstname}}</td>
 										<td>{{lastcallback.email}}</td>
 										<td>{{lastcallback.phone}}</td>
-										{# <td>{{lastcallback.time}}</td> #}
+										<td>{{lastcallback.creneau}}</td>
 										<td>{{lastcallback.date|date("d/m/Y")}}</td>
 										<td>{{lastcallback.message}}</td>
 

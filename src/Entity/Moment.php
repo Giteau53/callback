@@ -29,10 +29,7 @@ class Moment
      */
     private $creneaux;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Callback::class, mappedBy="moment")
-     */
-    private $callback;
+
 
     public function __construct()
     {
@@ -98,13 +95,6 @@ class Moment
         return $this;
     }
 
-    /**
-     * @return Collection<int, callback>
-     */
-    public function getCallback(): Collection
-    {
-        return $this->callback;
-    }
 
   
 

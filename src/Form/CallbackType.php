@@ -4,12 +4,11 @@ namespace App\Form;
 
 use App\Entity\Callback;
 use App\Entity\Creneau;
-
+use App\Entity\Moment;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -17,9 +16,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CallbackType extends AbstractType
@@ -46,12 +45,15 @@ class CallbackType extends AbstractType
         ->add('date', DateType::class,[
             'label' => 'Jour de rappel',
             'widget' => 'single_text',
+            'by_reference' => true,
         ])
+
+        
 
             ->add('moment', EntityType::class, [
                 'mapped' => false,
-                'class' => Creneau::class,
-                'choice_label' => 'moment',
+                'class' => Moment::class,
+                'choice_label' => 'name',
                 'placeholder' => 'Choisissez votre moment',
                 'label' => 'Moment',
                 'required' => false
@@ -59,7 +61,8 @@ class CallbackType extends AbstractType
 
             ->add('creneau', ChoiceType::class, [
                 'placeholder' => 'Choisissez votre créneau',
-                'required' => false
+                'required' => false,
+                
             ])
 
             ->add('message', TextareaType::class,[
@@ -73,26 +76,25 @@ class CallbackType extends AbstractType
             ])
         ;
 
-        $formModifier = function (FormInterface $form, Creneau $creneau = null) {
-            $heures = (null === $creneau) ? [] : $creneau->getCreneau();
+        $formModifier = function (FormInterface $form, Moment $moment= null) { 
+           $heures = (null === $moment) ? [] : $moment->getCreneaux();
 
             $form->add('creneau', EntityType::class,  [
                 'class' => Creneau::class,
                 'choices' => $heures,
-                'required' => false,
-                
-                'choice_label' => 'name',
-                'placeholder' => 'heures',
+                'choice_label' => 'creneau',
+                'placeholder' => 'Choisissez votre créneau',
                 'attr' => ['class' => 'custom-select'],
                 'label' => 'heures'
             ]);
         };
 
-        $builder->get('creneau')->addEventListener(
+        $builder->get('moment')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) use ($formModifier) {
                 $moment = $event->getForm()->getData();
                 $formModifier($event->getForm()->getParent(), $moment);
+               
             }
         );
 

@@ -31,10 +31,11 @@ class CallbackController extends AbstractController
        
 
         if ($form->isSubmitted() && $form->isValid()){
+            
             $this->entityManager->persist($callback);
             $this->entityManager->flush();
-            return $this->redirect($this->generateUrl('callback'));
             $this->addFlash('bravo', 'Votre message à bien été envoyé !');
+            return $this->redirect($this->generateUrl('callback'));
             
             
         }

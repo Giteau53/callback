@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Repository;
-use Doctrine\DBAL\Types\Types;
+
+
 use App\Entity\Callback;
-use DateTime;
+
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -46,7 +48,6 @@ class CallbackRepository extends ServiceEntityRepository
         }
     }
 
- 
     
     public function findByDate()
     {
@@ -54,14 +55,28 @@ class CallbackRepository extends ServiceEntityRepository
         $dateNow = new \DateTime('now');
         
         return $this->createQueryBuilder('c')
-            ->andWhere('c.date = :dateNow')
+            ->Where('c.date = :dateNow')
             ->setParameter('dateNow', $dateNow ->format('Y-m-d') )         
             ->getQuery()
             ->getResult()
         ;
     }
-   
 
+
+/**
+ * Recherche les annonces par le formulaire
+ * @return void
+ */
+
+ public function search($mots){
+    $query = $this->createQueryBuilder('a');
+    // $query->where('a.active = 1');
+    if($mots != null){
+        $query->andWhere('MATCH_AGAINST(a.lastname, a.firstname, a.message) AGAINST (:mots boolean)>0')
+            ->setParameter('mots', $mots);
+    }
+    return $query->getQuery()->getResult();
+ }
 
 
     /*

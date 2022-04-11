@@ -3,57 +3,66 @@
 {% block title %}Administration
 {% endblock %}
 {% block body %}
-	<div class=" d-flex justify-content-evenly my-5">
-		<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
+	<div class="col-8 mx-auto">
+		<h4 class="text-center mt-5">Rechercher par mot clé !</h4>
+		{{form(form)}}
 
 
-		<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
-
-		<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
-		</a>
-	</div>
-	<div class="col-8 mx-auto  ">
-		<h3 class="text-center my-3">Tout les rappels</h3>
-
-		{% if callbacks %}
-
-			<table class="table">
-				<thead class=" ">
-					<tr class="table-info">
-						<th scope="col ">#</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Prénom</th>
-						<th scope="col">Email</th>
-						<th scope="col">Téléphone</th>
-						{# <th scope="col">Moment</th> #}
-						{# <th scope="col">Heure</th> #}
-						<th scope="col">Date</th>
-						<th colspan="2" scope="col">Message</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for callback in callbacks %}
-						<tbody>
-							<tr>
-								<th scope="row">{{callback.id}}</th>
-								<td>{{callback.lastname}}</td>
-								<td>{{callback.firstname}}</td>
-								<td>{{callback.email}}</td>
-								<td>{{callback.phone}}</td>
-								{# <td>{{callback.creneau}}</td> #}
-								{# <td>{{callback.time}}</td> #}
-								<td>{{callback.date|date("d/m/Y")}}</td>
-								<td>{{callback.message}}</td>
-
-							</tr>
-
-						</tbody>
-					{% endfor %}
-				</tbody>
-			</table>
-		{% endif %}
+		</div>
+		<div class=" d-flex justify-content-evenly my-5">
+			<a href="{{path('admin_last')}}" class="btn btn-primary">Les 5 dernier rappels</a>
 
 
-	</div>
+			<a href="{{path('admin_today')}}" class="btn btn-primary">Rappel du jour</a>
 
-{% endblock %}
+			<a href="{{path('admin_add')}}" class="btn btn-primary">Ajouter un créneaux
+			</a>
+		</div>
+		<div class="col-8 mx-auto  ">
+			<h3 class="text-center my-3">Tout les rappels</h3>
+
+
+			{% if callbacks %}
+
+				<table class="table">
+					<thead class=" ">
+						<tr class="table-info">
+							<th scope="col ">#</th>
+							<th scope="col">Nom</th>
+							<th scope="col">Prénom</th>
+							<th scope="col">Email</th>
+							<th scope="col">Téléphone</th>
+							{# <th scope="col">Moment</th> #}
+							<th scope="col">Heure</th>
+							<th scope="col">Date</th>
+							<th colspan="2" scope="col">Message</th>
+						</tr>
+
+
+					</thead>
+					<tbody>
+						{% for callback in callbacks %}
+							<tbody>
+								<tr>
+									<th scope="row">{{callback.id}}</th>
+									<td>{{callback.lastname}}</td>
+									<td>{{callback.firstname}}</td>
+									<td>{{callback.email}}</td>
+									<td>{{callback.phone}}</td>
+									{# <td>{{callback.moment}}</td> #}
+									<td>{{callback.creneau}}</td>
+									<td>{{callback.date|date("d/m/Y")}}</td>
+									<td>{{callback.message}}</td>
+
+								</tr>
+
+							</tbody>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+
+
+		</div>
+
+	{% endblock %}

@@ -5,9 +5,14 @@ namespace App\Entity;
 use App\Repository\CallbackRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=CallbackRepository::class)
+ 
+ * @ORM\Table(name="callback", indexes={@ORM\Index(columns={"lastname", "firstname", "message"}, flags={"fulltext"})})
  */
 class Callback
 {
@@ -66,17 +71,18 @@ class Callback
     }
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $message;
 
     /**
-     * @ORM\OneToOne(targetEntity=Creneau::class, inversedBy="creneau_id", cascade={"persist", "remove"})
+
+     * @Assert\NotBlank()
+     * @ORM\OneToOne(targetEntity=Creneau::class, inversedBy="callback", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $creneau;
-
-   
-
+    
     
     
   
@@ -84,6 +90,8 @@ class Callback
     {
         return $this->id;
     }
+
+   
 
     public function getLastname(): ?string
     {
@@ -96,6 +104,8 @@ class Callback
 
         return $this;
     }
+
+
 
     public function getFirstname(): ?string
     {
@@ -133,14 +143,13 @@ class Callback
         return $this;
     }
 
-  
 
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate($date): self
     {
         $this->date = $date;
 
@@ -159,29 +168,20 @@ class Callback
         return $this;
     }
 
-    public function getCreneau(): ?creneau
+  
+
+    public function getCreneau(): ?Creneau
     {
         return $this->creneau;
     }
 
-    public function setCreneau(creneau $creneau): self
+    public function setCreneau(Creneau $creneau): self
     {
         $this->creneau = $creneau;
 
         return $this;
     }
 
-  
-
-  
-
-   
-
-  
-
-
-
-   
 
 
 }

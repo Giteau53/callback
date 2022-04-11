@@ -4,7 +4,10 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="text-center mt-5 ">Bienvenue sur l'application de rappel !</h1>
-
+	<div class="text-center">
+		<h1 class="mt-5 ">Bienvenue sur l'application de rappel !</h1>
+		<p class=" mt-5">Cliquez sur le bouton ci dessous pour remplir le formulaire !</p>
+		<a href="{{path('callback')}}" class="btn btn-primary ">Formulaire de rappel</a>
+	</div>
 
 {% endblock %}

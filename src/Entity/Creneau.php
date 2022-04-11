@@ -7,8 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
+
 /**
+ * 
  * @ORM\Entity(repositoryClass=CreneauRepository::class)
+
  */
 class Creneau
 {
@@ -21,6 +26,7 @@ class Creneau
 
     /**
      * @ORM\Column(type="string", length=255)
+ 
      */
     private $creneau;
 
@@ -29,6 +35,15 @@ class Creneau
      * @ORM\JoinColumn(nullable=false)
      */
     private $moment;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Callback::class, mappedBy="creneau", cascade={"persist", "remove"})
+     * 
+     */
+    private $callback;
+
+ 
+
  
 
     public function __construct()
@@ -42,8 +57,13 @@ class Creneau
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getCreneau();
+        
+    }
 
-    
+ 
     public function getCreneau(): ?string
     {
         return $this->creneau;
@@ -67,6 +87,25 @@ class Creneau
 
         return $this;
     }
+
+    public function getCallback(): ?Callback
+    {
+        return $this->callback;
+    }
+
+    public function setCallback(Callback $callback): self
+    {
+        // set the owning side of the relation if necessary
+        if ($callback->getCreneau() !== $this) {
+            $callback->setCreneau($this);
+        }
+
+        $this->callback = $callback;
+
+        return $this;
+    }
+
+    
 
 
 

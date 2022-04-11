@@ -32,6 +32,9 @@ class AddCreneauxController extends AbstractController
             $this->entityManager->persist($creneau);
             $this->entityManager->flush();
         
+        
+            $this->addFlash('bravo', 'Votre créneau à bien été enregistré !!');
+        
 
         }
 

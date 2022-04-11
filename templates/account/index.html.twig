@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!
+{% block title %}Mon compte
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,9 @@
 		<h1 class="mb-5">Bonjour
 			{{app.user.firstname}}!
 		</h1>
-		<a href="{{path('admin')}}" class="btn btn-primary">Accès à l'administration</a>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{path('admin')}}" class="btn btn-primary">Accès à l'administration</a>
+		{% endif %}
 
 	</div>
 {% endblock %}
